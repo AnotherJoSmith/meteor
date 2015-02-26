@@ -144,7 +144,6 @@ _.extend(PollingObserveDriver.prototype, {
       var newResults = self._synchronousCursor.getRawObjects(self._ordered);
     } catch (e) {
       // XXX if this is 'number' then we should not retry!!
-      // XXX ACTUALLY VERIFY THIS FACT
       console.log("IN POLLMONGO:", typeof(e.code))
       // getRawObjects can throw if we're having trouble talking to the
       // database.  That's fine --- we will repoll later anyway. But we should
