@@ -107,6 +107,16 @@ _.extend(ObserveMultiplexer.prototype, {
       self._readyFuture.return();
     });
   },
+  // XXX doc
+  errorXXX: function (err) {
+    var self = this;
+    self._queue.queueTask(function () {
+      if (self._ready())
+        throw Error("can't make ObserveMultiplex ready twice!");
+      self._readyFuture.throw(err);
+    });
+  },
+
   // Calls "cb" once the effects of all "ready", "addHandleAndSendInitialAdds"
   // and observe callbacks which came before this call have been propagated to
   // all handles. "ready" must have already been called on this multiplexer.
